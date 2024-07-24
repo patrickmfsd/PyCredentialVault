@@ -15,7 +15,7 @@ CREDENTIALS_FILE = 'credentials.txt'
 
 
 def add_credential():
-    print(f"{BOLD}==========={RESET} {GREEN}{BOLD}ADD NEW CREDENTIAL{RESET} {BOLD}==========={RESET}")
+    print(f"{bold}==========={reset} {green}{bold}ADD NEW CREDENTIAL{reset} {bold}==========={reset}")
     username = prompt_non_empty_input("Username: ")
     if username is None:
         return

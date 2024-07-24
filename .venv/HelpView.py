@@ -9,4 +9,4 @@ green = "\033[92m"
 
 
 def help_view():
-    print(f"{BOLD}==========={RESET} {GREEN}{BOLD}HELP{RESET} {BOLD}==========={RESET}")
+    print(f"{bold}==========={reset} {green}{bold}HELP{reset} {bold}==========={reset}")

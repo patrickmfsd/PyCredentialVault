@@ -9,4 +9,4 @@ green = "\033[92m"
 
 
 def settings():
-    print(f"{BOLD}==========={RESET} {GREEN}{BOLD}SETTINGS{RESET} {BOLD}==========={RESET}")
+    print(f"{bold}==========={reset} {green}{bold}SETTINGS{reset} {bold}==========={reset}")

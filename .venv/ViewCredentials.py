@@ -15,7 +15,7 @@ CREDENTIALS_FILE = 'credentials.txt'
 
 
 def view_credentials():
-    print(f"{BOLD}==========={RESET} {GREEN}{BOLD}VIEW CREDENTIALS{RESET} {BOLD}==========={RESET}")
+    print(f"{bold}==========={reset} {green}{bold}VIEW CREDENTIALS{reset} {bold}==========={reset}")
 
     if not os.path.exists(CREDENTIALS_FILE):
         print("Credential File Exists.\n")
@@ -29,8 +29,8 @@ def view_credentials():
 
         for index, line in enumerate(lines, start=1):
             username, password, url = line.strip().split(',')
-            print(f"{BOLD} Credential {index}{RESET}")
+            print(f"{bold} Credential {index}{reset}")
             print(f" Username: {username}")
             print(f" Password: {password}")
             print(f" URL: {url}\n")
-            print(f"----------------------------------------")
+            print(f"----------------------------------------\n")
