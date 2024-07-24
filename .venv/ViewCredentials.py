@@ -6,14 +6,15 @@ import getpass
 import os
 
 # ANSI escape codes for colors
-RESET = "\033[0m"
-BOLD = "\033[1m"
-GREEN = "\033[92m"
+reset = "\033[0m"
+bold = "\033[1m"
+green = "\033[92m"
 
 # File to store credentials
 CREDENTIALS_FILE = 'credentials.txt'
 
-def viewCredentials():
+
+def view_credentials():
     print(f"{BOLD}==========={RESET} {GREEN}{BOLD}VIEW CREDENTIALS{RESET} {BOLD}==========={RESET}")
 
     if not os.path.exists(CREDENTIALS_FILE):
@@ -33,4 +34,3 @@ def viewCredentials():
             print(f" Password: {password}")
             print(f" URL: {url}\n")
             print(f"----------------------------------------")
-

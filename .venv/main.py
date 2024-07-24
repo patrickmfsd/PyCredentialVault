@@ -11,31 +11,31 @@ from Settings import settings
 def main():
     # Action List
     actions = {
-        'N': addCredential,
-        'V': viewCredentials,
-        'H': help,
+        'N': add_credential,
+        'V': view_credentials,
+        'H': help_view,
         'S': settings,
         'Q': exit
     }
 
     # ANSI escape codes for colors
-    RESET = "\033[0m"
-    BOLD = "\033[1m"
-    TEAL = "\033[96m"
-    GREEN = "\033[92m"
-    RED = "\033[91m"
+    reset = "\033[0m"
+    bold = "\033[1m"
+    teal = "\033[96m"
+    green = "\033[92m"
+    red = "\033[91m"
 
     # Main Menu Display
     while True:
-        print(f"{BOLD}==========={RESET} {GREEN}{BOLD}PASSWORD MANAGER{RESET} {BOLD}==========={RESET}")
+        print(f"{bold}==========={reset} {green}{bold}PASSWORD MANAGER{reset} {bold}==========={reset}")
         print(" By Patrick Mifsud                 v0.1 ")
         print("----------------------------------------")
-        print(f" {GREEN}{BOLD}(N){RESET} New Credential")
-        print(f" {GREEN}{BOLD}(V){RESET} View Credentials")
+        print(f" {green}{bold}(N){reset} New Credential")
+        print(f" {green}{bold}(V){reset} View Credentials")
         print("----------------------------------------")
-        print(f" {BOLD}(S){RESET} Settings  |  {TEAL}{BOLD}(H){RESET} Help  |  {RED}{BOLD}(Q){RESET} Quit ")
+        print(f" {bold}(S){reset} Settings  |  {teal}{bold}(H){reset} Help  |  {red}{bold}(Q){reset} Quit ")
         print("----------------------------------------")
-        choice = input(f"{BOLD}Enter Option:{RESET} ")
+        choice = input(f"{bold}Enter Option:{reset} ")
 
         action = actions.get(choice)
         if action:

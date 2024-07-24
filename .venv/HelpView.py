@@ -3,9 +3,10 @@
 #  Copyright © 2024 Patrick Mifsud. All rights reserved.
 
 # ANSI escape codes for colors
-RESET = "\033[0m"
-BOLD = "\033[1m"
-GREEN = "\033[92m"
+reset = "\033[0m"
+bold = "\033[1m"
+green = "\033[92m"
 
-def help():
+
+def help_view():
     print(f"{BOLD}==========={RESET} {GREEN}{BOLD}HELP{RESET} {BOLD}==========={RESET}")
