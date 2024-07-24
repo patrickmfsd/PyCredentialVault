@@ -7,6 +7,7 @@ from AddCredential import addCredential
 from HelpView import help
 from Settings import settings
 
+
 def main():
     # Action List
     actions = {
@@ -35,7 +36,6 @@ def main():
         print(f" {BOLD}(S){RESET} Settings  |  {TEAL}{BOLD}(H){RESET} Help  |  {RED}{BOLD}(Q){RESET} Quit ")
         print("----------------------------------------")
         choice = input(f"{BOLD}Enter Option:{RESET} ")
-
 
         action = actions.get(choice)
         if action:
