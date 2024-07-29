@@ -1,9 +1,6 @@
-#  AddCredential.py
-#  Created by Patrick Mifsud on 24/7/24.
-#  Copyright © 2024 Patrick Mifsud. All rights reserved.
-
 import getpass
 import os
+from EncryptionHelper import encrypt_file
 
 # ANSI escape codes for colors
 reset = "\033[0m"
@@ -15,7 +12,7 @@ CREDENTIALS_FILE = 'credentials.txt'
 
 
 def add_credential():
-    print(f"{bold}==========={reset} {green}{bold}ADD NEW CREDENTIAL{reset} {bold}==========={reset}")
+    print(f"\n{green}{bold}=========== ADD NEW CREDENTIAL ==========={reset}")
     username = prompt_non_empty_input("Username: ")
     if username is None:
         return
@@ -44,8 +41,9 @@ def prompt_non_empty_input(prompt):
 
 def save_credential(username, password, url):
     try:
-        with open(CREDENTIALS_FILE, 'a') as file:
-            file.write(f"{username},{password},{url}\n")
+        # with open(CREDENTIALS_FILE, 'a') as file:
+        #     file.write(f"{username},{password},{url}\n")
+        encrypt_file()
         return True
     except IOError as e:
         print(f"Error: Could not write to file. {e}")
