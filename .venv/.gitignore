@@ -2,3 +2,9 @@
 */
 .Python
 pyvenv.cfg
+/lib
+/bin
+
+# Ignore Password files
+masterpw.text
+credentials.txt
