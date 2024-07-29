@@ -1,9 +1,10 @@
-#  AddCredential.py
-#  Created by Patrick Mifsud on 24/7/24.
-#  Copyright © 2024 Patrick Mifsud. All rights reserved.
+# AddCredential.py
+# Created by Patrick Mifsud on 24/7/24.
+# Copyright © 2024 Patrick Mifsud. All rights reserved.
 
 import getpass
 import os
+import validators
 
 # ANSI escape codes for colors
 reset = "\033[0m"
@@ -25,9 +26,7 @@ def add_credential():
         print("Error: Password cannot be empty.")
         return
 
-    url = prompt_non_empty_input("URL: ")
-    if url is None:
-        return
+    url = prompt_and_validate_url()
 
     # Write the credential to a file
     if save_credential(username, password, url):
@@ -40,6 +39,22 @@ def prompt_non_empty_input(prompt):
         print("Error: This field cannot be empty.")
         return None
     return value
+
+
+def prompt_and_validate_url() -> str:
+    """Prompt for a URL and validate it. Keep prompting until a valid URL is provided."""
+    while True:
+        url = prompt_non_empty_input("URL: ")
+        if not url:
+            continue  # Prompt again if URL is empty
+        if is_valid_url(url):
+            return url
+        print("Invalid URL. Please enter a valid URL.")
+
+
+def is_valid_url(url: str) -> bool:
+    """Validate a URL using the validators library."""
+    return validators.url(url)
 
 
 def save_credential(username, password, url):
