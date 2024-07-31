@@ -6,7 +6,16 @@
 reset = "\033[0m"
 bold = "\033[1m"
 green = "\033[92m"
-
+red = "\033[91m"
 
 def settings():
-    print(f"{bold}==========={reset} {green}{bold}SETTINGS{reset} {bold}==========={reset}")
+    print(f"\n{bold}=============== SETTINGS ==============={reset}")
+    print("------------------------------------")
+    print(f" {green}{bold}(MP){reset} Change Master Password")
+    print("------------------------------------")
+    print(f"{red}------------------------------------{reset}")
+    print(f" {red}{bold}(R){reset} {red}RESET PASSWORD DATABASE{reset}")
+    print(f"{red}------------------------------------{reset}")
+    print(f"\n{bold}========================================{reset}\n")
+
+    choice = input(f"{bold}Enter Option:{reset} ")

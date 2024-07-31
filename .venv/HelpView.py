@@ -7,7 +7,6 @@ reset = "\033[0m"
 bold = "\033[1m"
 teal = "\033[96m"
 
-
 def help_view():
     # Display the help content
     print(f"\n{teal}{bold}================= HELP ================={reset}\n")
