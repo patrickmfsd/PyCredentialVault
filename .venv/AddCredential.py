@@ -28,6 +28,7 @@ def add_credential():
 
     # Write the credential to a file
     if save_credential(username, password, url):
+        encrypt_file(CREDENTIALS_FILE)
         print("Credential Added Successfully.\n")
 
 
@@ -41,9 +42,8 @@ def prompt_non_empty_input(prompt):
 
 def save_credential(username, password, url):
     try:
-        # with open(CREDENTIALS_FILE, 'a') as file:
-        #     file.write(f"{username},{password},{url}\n")
-        encrypt_file()
+        with open(CREDENTIALS_FILE, 'a') as file:
+            file.write(f"{username},{password},{url}\n")
         return True
     except IOError as e:
         print(f"Error: Could not write to file. {e}")

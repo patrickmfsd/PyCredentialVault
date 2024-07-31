@@ -12,6 +12,9 @@ import os
 
 MPASS_FILE = 'masterpw.text'
 
+CREDENTIALS_FILE = 'credentials.txt'
+
+stored_password = None
 
 def initialize_credentials_file():
     """Create an empty credentials file if it does not exist."""
@@ -19,8 +22,14 @@ def initialize_credentials_file():
         with open(CREDENTIALS_FILE, 'wb') as file:
             pass  # Create an empty file
 
+def handle_quit():
+    print("Quitting...")
+    encrypt_file(CREDENTIALS_FILE)
+    exit()
 
 def main():
+    global stored_password
+
     initialize_credentials_file()
 
     # ANSI escape codes for colors
@@ -37,7 +46,7 @@ def main():
 
     # Check if MPASS_FILE is empty or does not exist
     if not os.path.exists(MPASS_FILE) or os.path.getsize(MPASS_FILE) == 0:
-        print("Please set a Master Password to securely\n store your credentials.\n")
+        print("Please set a Master Password to securely\nstore your credentials.\n")
         set_master_password()
 
     # Prompt user for the master password and verify it
@@ -52,7 +61,7 @@ def main():
         'V': view_credentials,
         'H': help_view,
         'S': settings,
-        'Q': exit
+        'Q': handle_quit
     }
 
 

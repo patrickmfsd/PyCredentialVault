@@ -40,7 +40,7 @@ def view_credentials():
         return
 
     try:
-        decrypt_file()
+        decrypt_file(CREDENTIALS_FILE)
         inspect_file_contents()
 
         with open(CREDENTIALS_FILE, 'rb') as file:
