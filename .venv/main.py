@@ -1,6 +1,6 @@
-#  main.py
-#  Created by Patrick Mifsud on 24/7/24.
-#  Copyright © 2024 Patrick Mifsud. All rights reserved.
+# main.py
+# Created by Patrick Mifsud on 24/7/24.
+# Copyright © 2024 Patrick Mifsud. All rights reserved.
 
 from ViewCredentials import view_credentials
 from AddCredential import add_credential
@@ -9,12 +9,14 @@ from Settings import settings
 from EncryptionHelper import *
 
 import os
+import getpass
+import sys
 
 MPASS_FILE = 'masterpw.text'
-
 CREDENTIALS_FILE = 'credentials.txt'
 
 stored_password = None
+
 
 def initialize_credentials_file():
     """Create an empty credentials file if it does not exist."""
@@ -25,11 +27,10 @@ def initialize_credentials_file():
 def handle_quit():
     print("Quitting...")
     encrypt_file(CREDENTIALS_FILE)
-    exit()
+    sys.exit()
+
 
 def main():
-    global stored_password
-
     initialize_credentials_file()
 
     # ANSI escape codes for colors
@@ -44,16 +45,7 @@ def main():
     print(" By Patrick Mifsud                 v0.1 ")
     print("\n----------------------------------------")
 
-    # Check if MPASS_FILE is empty or does not exist
-    if not os.path.exists(MPASS_FILE) or os.path.getsize(MPASS_FILE) == 0:
-        print("Please set a Master Password to securely\nstore your credentials.\n")
-        set_master_password()
-
-    # Prompt user for the master password and verify it
-    password = getpass.getpass("\nEnter your master password: ")
-    if not verify_master_password(password):
-        print("Invalid Master Password. Exiting application.\n")
-        return
+    initialize_master_pass()
 
     # Action List
     actions = {
@@ -64,7 +56,6 @@ def main():
         'Q': handle_quit
     }
 
-
     # Main Menu Display
     while True:
         print("\n----------------------------------------")
@@ -73,14 +64,13 @@ def main():
         print("----------------------------------------")
         print(f" {bold}(S){reset} Settings  |  {teal}{bold}(H){reset} Help  |  {red}{bold}(Q){reset} Quit ")
         print("----------------------------------------\n")
-        choice = input(f"{bold}Enter Option:{reset} ")
+        choice = input(f"{bold}Enter Option:{reset} ").upper()
 
         action = actions.get(choice)
         if action:
             action()
         else:
-            print("Invalid Choice. Please enter valid option.\n")
-
+            print("Invalid Choice. Please enter a valid option.\n")
 
 if __name__ == "__main__":
     main()

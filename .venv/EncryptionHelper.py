@@ -64,8 +64,12 @@ def decrypt_file(filename: str):
 
     try:
         with open(filename, 'rb') as file:
-            salt = file.readline().strip()
-            encrypted_data = file.read()
+            lines = file.readlines()
+            if len(lines) < 2:
+                print("File does not have the expected format.")
+                return
+            salt = lines[0].strip()
+            encrypted_data = lines[1]
     except IOError as e:
         print(f"Error reading file {filename}: {e}")
         return
@@ -113,8 +117,13 @@ def verify_master_password(password: str) -> bool:
         return False
 
     with open(MPASS_FILE, 'rb') as file:
-        salt = file.readline().strip()
-        stored_key = file.readline().strip()
+        lines = file.readlines()
+        if len(lines) != 2:
+            print("Master password file is incorrectly formatted.")
+            return False
+
+        salt = lines[0].strip()
+        stored_key = lines[1].strip()
 
     key = create_key(password, salt)
     stored_key = base64.urlsafe_b64decode(stored_key)
@@ -128,13 +137,18 @@ def load_master_password() -> str:
     if stored_password is not None:
         return stored_password
 
-    if not os.path.exists(MPASS_FILE):
-        print("Master password file not found. Exiting.")
+    if not os.path.exists(MPASS_FILE) or os.path.getsize(MPASS_FILE) == 0:
+        print("Master password file not found or is empty. Exiting.")
         sys.exit(1)
 
     with open(MPASS_FILE, 'rb') as file:
-        salt = file.readline().strip()
-        stored_key = file.readline().strip()
+        lines = file.readlines()
+        if len(lines) != 2:
+            print("Master password file is incorrectly formatted.")
+            sys.exit(1)
+
+        salt = lines[0].strip()
+        stored_key = lines[1].strip()
 
     password = getpass.getpass("Enter your master password: ")
     key = create_key(password, salt)
@@ -146,3 +160,21 @@ def load_master_password() -> str:
 
     stored_password = password
     return password
+
+
+def initialize_master_pass():
+    """Initialize or verify the master password."""
+    global stored_password
+
+    if os.path.exists(MPASS_FILE) and os.path.getsize(MPASS_FILE) > 0:
+        # Check if the stored master password is valid
+        password = getpass.getpass("\nEnter your master password: ")
+        if verify_master_password(password):
+            stored_password = password
+        else:
+            print("Invalid Master Password. Exiting application.\n")
+            sys.exit(1)
+    else:
+        print("Master password file does not exist or is empty.")
+        set_master_password()
+        stored_password = getpass.getpass("\nEnter your master password: ")
