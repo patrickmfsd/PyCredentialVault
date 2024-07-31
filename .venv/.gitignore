@@ -6,5 +6,5 @@ pyvenv.cfg
 /bin
 
 # Ignore Password files
-masterpw.text
+masterpw.txt
 credentials.txt
