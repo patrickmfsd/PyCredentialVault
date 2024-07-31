@@ -56,10 +56,10 @@ def view_credentials():
 
         for index, line in enumerate(lines, start=1):
             username, password, url = line.strip().split(',')
-            print(f"{bold} Credential {index}{reset}")
-            print(f" Username: {username}")
-            print(f" Password: {password}")
-            print(f" URL: {url}\n")
+            print(f"{bold}Credential {index}{reset}")
+            print(f"    Username: {username}")
+            print(f"    Password: {password}")
+            print(f"    URL: {url}\n")
             print(f"----------------------------------------\n")
 
     except Exception as e:
