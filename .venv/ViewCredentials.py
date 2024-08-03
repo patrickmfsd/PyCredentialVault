@@ -30,7 +30,7 @@ def inspect_file_contents():
 
 
 def view_credentials():
-    print(f"\n{green}{bold}=========== VIEW CREDENTIALS ==========={reset}")
+    print(f"\n{green}{bold}=========== VIEW CREDENTIALS ==========={reset}\n")
 
     if not os.path.exists(CREDENTIALS_FILE):
         print("Credential File Does Not Exist.\n")
@@ -53,6 +53,7 @@ def view_credentials():
 
         for index, line in enumerate(lines, start=1):
             username, password, url = line.strip().split(',')
+            print(f"----------------------------------------\n")
             print(f"{bold}Credential {index}{reset}")
             print(f"    Username: {username}")
             print(f"    Password: {password}")
