@@ -5,7 +5,6 @@
 from ViewCredentials import view_credentials
 from AddCredential import add_credential
 from HelpView import help_view
-from Settings import settings
 from EncryptionHelper import *
 
 import os
@@ -51,8 +50,7 @@ def main():
     actions = {
         'N': add_credential,
         'V': view_credentials,
-        'H': help_view,
-        'S': settings,
+        '?': help_view,
         'Q': handle_quit
     }
 
@@ -62,7 +60,7 @@ def main():
         print(f" {green}{bold}(N){reset} New Credential")
         print(f" {green}{bold}(V){reset} View Credentials")
         print("----------------------------------------")
-        print(f" {bold}(S){reset} Settings  |  {teal}{bold}(H){reset} Help  |  {red}{bold}(Q){reset} Quit ")
+        print(f" {teal}{bold}(?){reset} Help           | {red}{bold}(Q){reset} Quit")
         print("----------------------------------------\n")
         choice = input(f"{bold}Enter Option:{reset} ").upper()
 
