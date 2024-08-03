@@ -14,7 +14,7 @@ CREDENTIALS_FILE = 'credentials.txt'
 def add_credential():
     print(f"\n{green}{bold}=========== ADD NEW CREDENTIAL ==========={reset}\n")
     print("Password is obscured when typing.\n")
-    username = prompt_non_empty_input("Username: ")
+    username = prompt_for_non_empty_input("Username: ")
     if username is None:
         return
 
@@ -23,7 +23,7 @@ def add_credential():
         print("Password cannot be empty.")
         return
 
-    url = prompt_non_empty_input("URL: ")
+    url = prompt_for_non_empty_input("URL: ")
     if url is None:
         return
 
