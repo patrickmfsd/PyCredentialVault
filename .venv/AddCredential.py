@@ -12,14 +12,15 @@ CREDENTIALS_FILE = 'credentials.txt'
 
 
 def add_credential():
-    print(f"\n{green}{bold}=========== ADD NEW CREDENTIAL ==========={reset}")
+    print(f"\n{green}{bold}=========== ADD NEW CREDENTIAL ==========={reset}\n")
+    print("Password is obscured when typing.\n")
     username = prompt_non_empty_input("Username: ")
     if username is None:
         return
 
     password = getpass.getpass("Password: ").strip()
     if not password:
-        print("Error: Password cannot be empty.")
+        print("Password cannot be empty.")
         return
 
     url = prompt_non_empty_input("URL: ")
@@ -32,7 +33,7 @@ def add_credential():
         print("Credential Added Successfully.\n")
 
 
-def prompt_non_empty_input(prompt):
+def prompt_for_non_empty_input(prompt):
     value = input(prompt).strip()
     if not value:
         print("Error: This field cannot be empty.")
