@@ -11,8 +11,8 @@ MPASS_FILE = 'masterpw.txt'
 CREDENTIALS_FILE = 'credentials.txt'
 stored_password = None
 
+# Generate a key from the password and salt using PBKDF2HMAC
 def create_key(password: str, salt: bytes) -> bytes:
-    """Create a key from the password and salt using PBKDF2HMAC."""
     password_bytes = password.encode('utf-8')
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
@@ -24,8 +24,9 @@ def create_key(password: str, salt: bytes) -> bytes:
     key = base64.urlsafe_b64encode(kdf.derive(password_bytes))
     return key
 
+
+# Encrypt text file
 def encrypt_file(filename: str):
-    """Encrypt the contents of a text file in place."""
     if not os.path.exists(filename):
         print(f"File {filename} does not exist.")
         return
@@ -52,10 +53,9 @@ def encrypt_file(filename: str):
         print(f"Error writing to file {filename}: {e}")
         return
 
-    print(f"File {filename} encrypted successfully.")
 
+# Decrypt text file.
 def decrypt_file(filename: str):
-    """Decrypt the contents of a text file in place."""
     if not os.path.exists(filename):
         print(f"File {filename} does not exist.")
         return
@@ -90,10 +90,9 @@ def decrypt_file(filename: str):
         print(f"Error writing to file {filename}: {e}")
         return
 
-    print(f"File {filename} decrypted successfully.")
 
+# Prompt user to set master password and store in MPASS_FILE.
 def set_master_password():
-    """Prompt user to set and store a master password."""
     while True:
         password = getpass.getpass("Set Master Password: ")
         confirm_password = getpass.getpass("Confirm Master Password: ")
@@ -111,8 +110,9 @@ def set_master_password():
         else:
             print("Passwords do not match. Please try again.")
 
+
+# Verify Master Password file is correct
 def verify_master_password(password: str) -> bool:
-    """Verify the provided master password."""
     if not os.path.exists(MPASS_FILE):
         return False
 
@@ -130,8 +130,9 @@ def verify_master_password(password: str) -> bool:
 
     return key == stored_key
 
+
+# Load and return the master password if it has been set already
 def load_master_password() -> str:
-    """Load and return the master password if it is already stored."""
     global stored_password
 
     if stored_password is not None:

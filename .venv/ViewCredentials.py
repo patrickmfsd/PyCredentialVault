@@ -7,7 +7,6 @@ import os
 
 from EncryptionHelper import *
 
-
 # ANSI escape codes for colors
 reset = "\033[0m"
 bold = "\033[1m"
@@ -17,15 +16,13 @@ green = "\033[92m"
 CREDENTIALS_FILE = 'credentials.txt'
 
 
+# Inspect the file contents after decryption.
 def inspect_file_contents():
-    """Inspect the file contents after decryption."""
     if os.path.exists(CREDENTIALS_FILE):
         with open(CREDENTIALS_FILE, 'rb') as file:
             contents = file.read()
-            print("File Contents After Decryption:", contents)
             try:
                 decoded_contents = contents.decode('utf-8')
-                print("Decoded Contents:", decoded_contents)
             except UnicodeDecodeError:
                 print("Failed to decode file contents.")
     else:
