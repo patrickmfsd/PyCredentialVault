@@ -1,5 +1,11 @@
+# AddCredential.py
+# Created by Patrick Mifsud on 24/7/24.
+# Copyright © 2024 Patrick Mifsud. All rights reserved.
+
 import getpass
 import os
+import validators
+
 from EncryptionHelper import encrypt_file
 
 # ANSI escape codes for colors
@@ -23,14 +29,22 @@ def add_credential():
         print("Password cannot be empty.")
         return
 
-    url = prompt_for_non_empty_input("URL: ")
-    if url is None:
-        return
+    while True:
+        url = prompt_for_non_empty_input("URL: ")
+        if is_valid_url(url):
+            print(f"{url} is a valid URL.")
+            break  # Exit loop if URL is valid
+        else:
+            print(f"{url} is not a valid URL. Please enter a valid URL.")
 
     # Write the credential to a file
     if save_credential(username, password, url):
         encrypt_file(CREDENTIALS_FILE)
         print("Credential Added Successfully.\n")
+
+
+def is_valid_url(url):
+    return validators.url(url)
 
 
 def prompt_for_non_empty_input(prompt):

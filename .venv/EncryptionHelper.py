@@ -1,3 +1,8 @@
+# EncryptionHelper.py
+# Created by Patrick Mifsud on 25/7/24.
+# Copyright © 2024 Patrick Mifsud. All rights reserved.
+
+
 import base64
 import os
 import getpass
@@ -101,7 +106,7 @@ def set_master_password():
         if password == confirm_password:
             salt = os.urandom(16)
             key = create_key(password, salt)
-            fernet = Fernet(key)
+            # fernet = Fernet(key)
 
             with open(MPASS_FILE, 'wb') as file:
                 file.write(salt + b'\n' + base64.urlsafe_b64encode(key))
@@ -165,7 +170,6 @@ def load_master_password() -> str:
 
 
 def initialize_master_pass():
-    """Initialize or verify the master password."""
     global stored_password
 
     if os.path.exists(MPASS_FILE) and os.path.getsize(MPASS_FILE) > 0:

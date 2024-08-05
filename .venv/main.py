@@ -29,6 +29,7 @@ def clear_terminal():
     else:
         os.system('clear')  # Unix/Linux/Mac
 
+
 # Exit handling, encrypt file > clear terminal > exit program
 def handle_quit():
     print("Quitting...")
@@ -77,6 +78,7 @@ def main():
             action()
         else:
             print("Invalid Choice. Please enter a valid option.\n")
+
 
 if __name__ == "__main__":
     main()
