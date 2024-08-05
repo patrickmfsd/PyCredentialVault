@@ -6,6 +6,8 @@ import getpass
 import os
 import validators
 
+from EncryptionHelper import encrypt_file
+
 # ANSI escape codes for colors
 reset = "\033[0m"
 bold = "\033[1m"
@@ -16,45 +18,41 @@ CREDENTIALS_FILE = 'credentials.txt'
 
 
 def add_credential():
-    print(f"{bold}==========={reset} {green}{bold}ADD NEW CREDENTIAL{reset} {bold}==========={reset}")
-    username = prompt_non_empty_input("Username: ")
+    print(f"\n{green}{bold}=========== ADD NEW CREDENTIAL ==========={reset}\n")
+    print("Password is obscured when typing.\n")
+    username = prompt_for_non_empty_input("Username: ")
     if username is None:
         return
 
     password = getpass.getpass("Password: ").strip()
     if not password:
-        print("Error: Password cannot be empty.")
+        print("Password cannot be empty.")
         return
 
-    url = prompt_and_validate_url()
+    while True:
+        url = prompt_for_non_empty_input("URL: ")
+        if is_valid_url(url):
+            print(f"{url} is a valid URL.")
+            break  # Exit loop if URL is valid
+        else:
+            print(f"{url} is not a valid URL. Please enter a valid URL.")
 
     # Write the credential to a file
     if save_credential(username, password, url):
+        encrypt_file(CREDENTIALS_FILE)
         print("Credential Added Successfully.\n")
 
 
-def prompt_non_empty_input(prompt):
+def is_valid_url(url):
+    return validators.url(url)
+
+
+def prompt_for_non_empty_input(prompt):
     value = input(prompt).strip()
     if not value:
         print("Error: This field cannot be empty.")
         return None
     return value
-
-
-def prompt_and_validate_url() -> str:
-    """Prompt for a URL and validate it. Keep prompting until a valid URL is provided."""
-    while True:
-        url = prompt_non_empty_input("URL: ")
-        if not url:
-            continue  # Prompt again if URL is empty
-        if is_valid_url(url):
-            return url
-        print("Invalid URL. Please enter a valid URL.")
-
-
-def is_valid_url(url: str) -> bool:
-    """Validate a URL using the validators library."""
-    return validators.url(url)
 
 
 def save_credential(username, password, url):

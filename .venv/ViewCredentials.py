@@ -1,9 +1,11 @@
-#  ViewCredentials.py
-#  Created by Patrick Mifsud on 24/7/24.
-#  Copyright © 2024 Patrick Mifsud. All rights reserved.
+# ViewCredentials.py
+# Created by Patrick Mifsud on 24/7/24.
+# Copyright © 2024 Patrick Mifsud. All rights reserved.
 
 import getpass
 import os
+
+from EncryptionHelper import *
 
 # ANSI escape codes for colors
 reset = "\033[0m"
@@ -14,23 +16,51 @@ green = "\033[92m"
 CREDENTIALS_FILE = 'credentials.txt'
 
 
+# Inspect the file contents after decryption.
+def inspect_file_contents():
+    if os.path.exists(CREDENTIALS_FILE):
+        with open(CREDENTIALS_FILE, 'rb') as file:
+            contents = file.read()
+            try:
+                decoded_contents = contents.decode('utf-8')
+            except UnicodeDecodeError:
+                print("Failed to decode file contents.")
+    else:
+        print(f"File {CREDENTIALS_FILE} does not exist.")
+
+
 def view_credentials():
-    print(f"{bold}==========={reset} {green}{bold}VIEW CREDENTIALS{reset} {bold}==========={reset}")
+    print(f"\n{green}{bold}=========== VIEW CREDENTIALS ==========={reset}\n")
 
     if not os.path.exists(CREDENTIALS_FILE):
-        print("Credential File Exists.\n")
+        print("Credential File Does Not Exist.\n")
         return
 
-    with open(CREDENTIALS_FILE, 'r') as file:
-        lines = file.readlines()
+    try:
+        decrypt_file(CREDENTIALS_FILE)
+        inspect_file_contents()
+
+        with open(CREDENTIALS_FILE, 'rb') as file:
+            decrypted_data = file.read()
+
+        # Decode the decrypted data
+        decoded_data = decrypted_data.decode('utf-8')
+        lines = decoded_data.splitlines()
+
         if not lines:
             print("No Credentials Stored.\n")
             return
 
         for index, line in enumerate(lines, start=1):
             username, password, url = line.strip().split(',')
+            print(f"----------------------------------------\n")
             print(f"{bold}Credential {index}{reset}")
             print(f"    Username: {username}")
             print(f"    Password: {password}")
             print(f"    URL: {url}\n")
             print(f"----------------------------------------\n")
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+    print(f"\n{green}{bold}========================================{reset}\n")

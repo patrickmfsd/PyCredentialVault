@@ -1,0 +1,10 @@
+# created by virtualenv automatically
+*/
+.Python
+pyvenv.cfg
+/lib
+/bin
+
+# Ignore Password files
+masterpw.txt
+credentials.txt

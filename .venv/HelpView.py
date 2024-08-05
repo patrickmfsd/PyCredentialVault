@@ -1,6 +1,6 @@
-#  HelpView.py
-#  Created by Patrick Mifsud on 24/7/24.
-#  Copyright © 2024 Patrick Mifsud. All rights reserved.
+# HelpView.py
+# Created by Patrick Mifsud on 24/7/24.
+# Copyright © 2024 Patrick Mifsud. All rights reserved.
 
 # ANSI escape codes for colors
 reset = "\033[0m"
@@ -15,11 +15,18 @@ def help_view():
           "To choose an option, type the\n"
           "corresponding option.")
 
+    print(f"\n{bold}----------{reset} {bold}Credential Encryption{reset} {bold}----------{reset}")
+    print("All credentials are encrypted with a user\n"
+          "chosen password. When exiting the app\n"
+          "credential database is encrypted.\n")
+
     print(f"\n{bold}----------{reset} {bold}Adding Credentials{reset} {bold}----------{reset}")
     print("To add a new credential, from the main\n"
           "menu, choose the (N) option. Follow the\n"
           "prompts and enter the username, password,\n"
-          "and URL.")
+          "and URL.\n")
+
+    print("\nPasswords are obscured when typing.")
 
     print(f"\n{bold}-----------{reset} {bold}View Credentials{reset} {bold}-----------{reset}")
     print("To add a view saved credential, from the\n"
@@ -29,10 +36,4 @@ def help_view():
     print("To view this help file, from the main\n"
           "menu, choose the (H) option.")
 
-    print(f"\n{bold}---------------{reset} {bold}Settings{reset} {bold}---------------{reset}")
-    print("To view settings, from the main menu,\n"
-          "choose the (H) option.\n"
-          "From settings you can clear the\n"
-          "password database, set/change\n"
-          "master password.")
     print(f"\n{teal}{bold}========================================{reset}\n")
