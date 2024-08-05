@@ -18,14 +18,22 @@ stored_password = None
 
 
 def initialize_credentials_file():
-    """Create an empty credentials file if it does not exist."""
     if not os.path.exists(CREDENTIALS_FILE):
         with open(CREDENTIALS_FILE, 'wb') as file:
             pass  # Create an empty file
 
+
+def clear_terminal():
+    if os.name == 'nt':
+        os.system('cls')  # Windows
+    else:
+        os.system('clear')  # Unix/Linux/Mac
+
+# Exit handling, encrypt file > clear terminal > exit program
 def handle_quit():
     print("Quitting...")
     encrypt_file(CREDENTIALS_FILE)
+    clear_terminal()
     sys.exit()
 
 
