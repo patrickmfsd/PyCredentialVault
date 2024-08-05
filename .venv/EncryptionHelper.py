@@ -11,6 +11,7 @@ MPASS_FILE = 'masterpw.txt'
 CREDENTIALS_FILE = 'credentials.txt'
 stored_password = None
 
+
 # Generate a key from the password and salt using PBKDF2HMAC
 def create_key(password: str, salt: bytes) -> bytes:
     password_bytes = password.encode('utf-8')
