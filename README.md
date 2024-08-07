@@ -1,8 +1,8 @@
 # PyCredentialVault
-PyCredentialVault is a secure and efficient password manager designed for terminal use. Built in Python, it offers a robust solution for managing and safeguarding your credentials. With an emphasis on simplicity and security, SerpentKeys ensures that your sensitive information remains protected.
+PyCredentialVault is a secure and efficient password manager designed for terminal use. Built in Python, it offers a robust solution for managing and safeguarding your credentials. 
 
 **Note:**
-Project was installed created for for a university course assignment, then expanded upon to support encryption.
+Project was initially created for a university course assignment, then expanded upon to support encryption.
 
 ## Features
 
